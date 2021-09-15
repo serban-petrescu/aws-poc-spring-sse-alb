@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>Demo</title>
+</head>
+<body>
+<h1>Demo</h1>
+<div id="output"></div>
+<script>
+    const sse = new EventSource("/sse");
+    document.getElementById("output").innerHTML = '';
+    sse.addEventListener("demo", function(e) {
+        document.getElementById("output").innerHTML += `<p>${e.data}</p>`;
+    });
+</script>
+</body>
+</html>

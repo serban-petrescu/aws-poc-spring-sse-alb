@@ -1,14 +1,12 @@
-# Welcome to your CDK TypeScript project!
+# Spring SSE behind AWS ALB PoC
 
-This is a blank project for TypeScript development with CDK.
+Proof-of-concept that checks if Server Sent Events work with a Spring Boot App behind an AWS Application Load Balancer.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-## Useful commands
-
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+Main components:
+ * The ALB + ECS Fargate service is set up via CDK in `/bin/checkin-sse-alb.ts`.
+ * The Spring Boot backend is in `/app`.
+ * The backend `DemoSecurity` configuration creates a form-based login with 2 users: user1 / password, user2 / password.
+ * The backend `DemoService` service maintains a map between user IDs (usernames) and SSE Emitters.
+ * The backend `DemoController` controller exposes an endpoint that is called by the UI to start a SSE connection.
+ * The HTML frontend is in `/app/src/main/resources/static`.
+ * Once opened, the frontend immediately starts the SSE connection and prints the messages received.
